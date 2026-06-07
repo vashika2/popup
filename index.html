@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bleh 💖</title>
+
+    <!-- Google Fonts: Pacifico for the title, Nunito for body text -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- This canvas sits behind everything and shows the falling confetti -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- The main card — your Canva design is the background of this -->
+<div class="card" id="card">
+
+    <!-- The title text sits at the top of the card over the design -->
+    <h1 id="title"></h1>
+
+    <!-- Sparkles that float and animate on top of the card -->
+    <span class="sparkle" style="top:10%; left:7%;   animation-delay: 0.0s">💗</span>
+    <span class="sparkle" style="top:15%; right:8%;  animation-delay: 0.5s">⭐</span>
+    <span class="sparkle" style="top:50%; left:4%;   animation-delay: 1.0s">✨</span>
+    <span class="sparkle" style="top:55%; right:5%;  animation-delay: 1.5s">💗</span>
+    <span class="sparkle" style="top:30%; left:2%;   animation-delay: 2.0s">🌸</span>
+    <span class="sparkle" style="top:75%; left:10%;  animation-delay: 0.8s">⭐</span>
+    <span class="sparkle" style="top:80%; right:10%; animation-delay: 1.3s">✨</span>
+
+    <!-- The message ribbon slides up from the bottom of the card -->
+    <div class="message-ribbon" id="message-ribbon"></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

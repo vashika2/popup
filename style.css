@@ -1,0 +1,162 @@
+/* ── Reset ───────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Page ────────────────────────────────────────────── */
+html, body {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+
+  /*
+    Default background colour — deep purple to match your Canva design.
+    This gets overridden per-occasion by script.js
+  */
+  background: #2d1b69;
+  transition: background 0.5s ease;
+}
+
+/* ── Confetti canvas ─────────────────────────────────── */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* clicks pass through to the card */
+  z-index: 0;
+}
+
+/* ── Card ────────────────────────────────────────────── */
+.card {
+  position: relative;
+  z-index: 2;
+
+  /*
+    Your Canva design fills this card.
+    The image path is set dynamically in script.js per occasion,
+    but you can also hardcode it here if you only have one design.
+  */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /*
+    Size: landscape ratio matching a typical Canva presentation size.
+    min() makes it responsive — never wider than 580px, never wider than 94vw.
+  */
+  width: min(94vw, 580px);
+  aspect-ratio: 16 / 9;
+
+  border-radius: 28px;
+  border: 6px solid #2d1b69; /* dark purple outer border */
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.45);
+
+  /*
+    Flex column so the title sits at the top
+    and the ribbon sticks to the bottom
+  */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 5%;
+
+  /* Card pops in with a springy animation when the page loads */
+  animation: popIn 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Card pop-in animation */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.55) translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Title ───────────────────────────────────────────── */
+h1 {
+  font-family: 'Pacifico', cursive;
+
+  /*
+    clamp(min, preferred, max) — scales with screen size.
+    On a tiny phone it's 1rem, on a big screen it's 1.7rem.
+  */
+  font-size: clamp(1rem, 3.5vw, 1.7rem);
+
+  color: #3b1f8c; /* dark purple — matches your Canva title colour */
+  text-align: center;
+  padding: 0 1rem;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.35);
+  z-index: 3;
+  max-width: 90%;
+}
+
+/* ── Floating sparkles ───────────────────────────────── */
+.sparkle {
+  position: absolute;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  pointer-events: none;
+  z-index: 4;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+/* Each sparkle gently bobs up and down */
+@keyframes sparkleFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(-9px) scale(1.25);
+    opacity: 1;
+  }
+}
+
+/* ── Message ribbon ──────────────────────────────────── */
+/*
+  This is the strip at the bottom of the card that shows the custom message.
+  It slides up into view after the card appears.
+*/
+.message-ribbon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background: rgba(45, 27, 105, 0.83); /* semi-transparent dark purple */
+  color: #ffffff;
+  font-size: clamp(0.7rem, 2.2vw, 0.92rem);
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 18px;
+
+  border-radius: 0 0 22px 22px; /* rounds only the bottom corners */
+  backdrop-filter: blur(5px);   /* blurs the card image behind the ribbon */
+  z-index: 5;
+
+  /* Slides up from below after a short delay */
+  animation: slideUp 0.65s 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Ribbon slide-up animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
